@@ -7,8 +7,12 @@ from .forms import SignupForm, LoginForm
 def signup(request):
     if request.method == 'POST':
         form = SignupForm(request.POST, request.FILES)
+        print("form")
+        print(form)
         if form.is_valid():
             user = form.save()
+            print("user")
+            print(user)
             return redirect('accounts:login')
     else:
         form = SignupForm()
@@ -28,7 +32,8 @@ def login_check(request):
             login(request, user)
             return redirect("/")
         else:
-            return render(request, 'accounts/login_fail_info.html')
+            print("here")
+            return render(request, 'accounts/login_fail.html')
     else:
         form = LoginForm()
         return render(request, 'accounts/login.html', {"form":form})
